@@ -10,28 +10,23 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       </head>
-      <body>
-        <header class="navbar-fixed">
+      <body class="#ffa726 orange lighten-1">
+        <header class="navbar-fixed ">
           <nav>
-            <div class="nav-wrapper #05a0d1">
-              <ul>
-                <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Lyoko</a></li>
-              </ul>
-              <ul class="right">
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'posts_create' %}">Post</a></li>
-              </ul>
-            </div>
+            <div class="nav-wrapper #0097a7 cyan darken-2">
+
+           <!-- navbar will go here -->
+
           </nav>
         </header>
+
         <main class="container">
           {% block content %}
           {% endblock %}
         </main>
-        <footer class="page-footer blue">
+        <footer class="page-footer #0097a7 cyan darken-2">
           <div class="right">All Rights Reserved, &copy; 2024 PivotLabs &nbsp;</div>
         </footer>
       </body>
 </html>
-{% block content %}
-{% endblock %}
+
