@@ -83,7 +83,10 @@ DATABASES = {
         'NAME': 'lyoko',
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PW'),
-        'HOST': env('HOST')
+        'HOST': env('HOST'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
     }
 }
 
