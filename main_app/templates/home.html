@@ -11,4 +11,24 @@
   <a href="{% url 'login' %}">Log In</a>
 {% endif %}
 
+<h1>Post</h1>
+
+<ul>
+
+    {% for post in object_list %}
+    <br/>
+    
+   <li>
+    <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+    
+        - {{ post.author }} <br/>
+       
+        {{ post.body }}
+   </li> 
+    
+    {% endfor %}
+
+</ul>
+
+
 {% endblock %}
