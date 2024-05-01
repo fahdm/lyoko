@@ -11,8 +11,9 @@
     <br/>
 
     {{ post.body }} <small>
-        
-        <a href="{% url 'edit_post' post.pk %}">Edit</a> <br/>
+
+        <a href="{% url 'edit_post' post.pk %}">Edit</a> 
+        <a href="{% url 'delete_post' post.pk %}">Delete</a> <br/>
 
       </small> 
 
@@ -20,6 +21,7 @@
     <a  href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2" >Back</a>
     
 
+   
 
 
     {% endblock %}

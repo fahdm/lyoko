@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate,login
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView, CreateView,UpdateView
+from django.views.generic import ListView,DetailView, CreateView,UpdateView,DeleteView
 from .models import Post
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -24,6 +24,7 @@ def logout_view(request):
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
+    ordering = ['-id']
 
 
 class ArticleDetailView(DetailView):
@@ -33,6 +34,7 @@ class ArticleDetailView(DetailView):
 class AddPostView(CreateView):
     model = Post
     template_name = 'post.html'
+    fields = '__all__'
     fields = ['title', 'title_tag','body']
     success_url = reverse_lazy('home')
     def form_valid(self, form):
@@ -47,3 +49,7 @@ class UpdatePostView(UpdateView):
     template_name = 'update_post.html'
     fields = ['title','title_tag', 'body']
 
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'delete_post.html'
+    success_url = reverse_lazy('home')
