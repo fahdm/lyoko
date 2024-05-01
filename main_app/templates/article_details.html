@@ -10,7 +10,11 @@
     <hr>
     <br/>
 
-    {{ post.body }}
+    {{ post.body }} <small>
+        
+        <a href="{% url 'edit_post' post.pk %}">Edit</a> <br/>
+
+      </small> 
 
     <br/><br/>
     <a  href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2" >Back</a>

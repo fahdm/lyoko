@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate,login
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView, CreateView
+from django.views.generic import ListView,DetailView, CreateView,UpdateView
 from .models import Post
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -42,5 +42,8 @@ class AddPostView(CreateView):
         messages.success(self.request,'post created successfully')
         return super().form_valid(form)
 
-
+class UpdatePostView(UpdateView):
+    model = Post
+    template_name = 'update_post.html'
+    fields = ['title','title_tag', 'body']
 
