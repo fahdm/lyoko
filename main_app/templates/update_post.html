@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
 <div class="row">
     <div class="col s12 m6">
         <div class="card #fafafa grey lighten-5">
@@ -23,5 +25,11 @@
         </div>
     </div>
 </div>
+
+{% else %}
+
+You are not authorized to view this page-footer
+
+{% endif %}
 
 {% endblock %}

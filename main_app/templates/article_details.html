@@ -6,22 +6,27 @@
 {% block content %}
 
 <h1>{{ post.title }} </h1>
-<small> By: {{ post.author }}</small> <br/>
-    <hr>
-    <br/>
+<small> By: {{ post.author }}</small> <br />
+<hr>
+<br />
 
-    {{ post.body }} <small>
+{{ post.body }}
 
-        <a href="{% url 'edit_post' post.pk %}">Edit</a> 
-        <a href="{% url 'delete_post' post.pk %}">Delete</a> <br/>
+{% if user.is_authenticated %}
+<small>
 
-      </small> 
+  <a href="{% url 'edit_post' post.pk %}">Edit</a>
+  <a href="{% url 'delete_post' post.pk %}">Delete</a> <br />
 
-    <br/><br/>
-    <a  href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2" >Back</a>
-    
+</small>
 
-   
+{% endif %}
+
+<br /><br />
+<a href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2">Back</a>
 
 
-    {% endblock %}
+
+
+
+{% endblock %}

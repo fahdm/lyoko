@@ -12,10 +12,10 @@ from django.urls import reverse_lazy
 
 
 
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('home')
+# @login_required
+# def logout_view(request):
+#     logout(request)
+#     return redirect('home')
 
 # Create your views here.
 # def home(request):
