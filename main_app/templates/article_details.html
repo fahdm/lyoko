@@ -1,32 +1,43 @@
 {% extends 'base.html' %}
+
 {% block title %}
-{{ post.title_tag }}
+    {{ post.title_tag }}
 {% endblock %}
 
 {% block content %}
+    <h1>{{ post.title }}</h1>
+    <small> By: {{ post.author }} {{ post.created_at }}</small> <br />
+    <hr>
+    <br />
 
-<h1>{{ post.title }} </h1>
-<small> By: {{ post.author }}</small> <br />
-<hr>
-<br />
+    {{ post.body | safe }}
 
-{{ post.body }}
+    {% if user.is_authenticated %}
+        <small>
+            <a href="{% url 'edit_post' post.pk %}">Edit</a>
+            <a href="{% url 'delete_post' post.pk %}">Delete</a> <br />
+        </small>
+    {% endif %}
 
-{% if user.is_authenticated %}
-<small>
+    <br /><br />
+    <hr>
+    <h2>Comments</h2>
+    <br/>
 
-  <a href="{% url 'edit_post' post.pk %}">Edit</a>
-  <a href="{% url 'delete_post' post.pk %}">Delete</a> <br />
+    {% if not post.comments.all %}
+        No comments... <a href="#">Add One</a>
+    {% else %}
+        {% for comment in post.comments.all %}
+            <strong>
+                {{ comment.name }} -
+                {{ comment.created_at }}
+            </strong><br />
+            {{ comment.body }}
+            <br/><br/>
+           
+        {% endfor %}
+    {% endif %}
+    <hr>
 
-</small>
-
-{% endif %}
-
-<br /><br />
-<a href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2">Back</a>
-
-
-
-
-
+    <a href="{% url 'home' %}" class="waves-effect waves-light btn #0097a7 cyan darken-2">Back</a>
 {% endblock %}

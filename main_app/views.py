@@ -3,7 +3,7 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.views.generic import ListView,DetailView, CreateView,UpdateView,DeleteView
-from .models import Post
+from .models import Post,Category
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,14 +12,18 @@ from django.urls import reverse_lazy
 
 
 
-# @login_required
-# def logout_view(request):
-#     logout(request)
-#     return redirect('home')
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
-# Create your views here.
-# def home(request):
-#     return render(request, 'home.html', {})
+#def home(request):
+    return render(request, 'home.html', {})
+
+def CategoryView(request,cats):
+    category_posts = Post.objects.filter(category=cats)
+    return render(request,'categories.html',{'cats': cats, 'category_posts': category_posts})
+
 
 class HomeView(ListView):
     model = Post
@@ -33,9 +37,10 @@ class ArticleDetailView(DetailView):
 
 class AddPostView(CreateView):
     model = Post
+    # form_class = PostForm
     template_name = 'post.html'
     fields = '__all__'
-    fields = ['title', 'title_tag','body']
+    fields = ['title','body']
     success_url = reverse_lazy('home')
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -44,8 +49,15 @@ class AddPostView(CreateView):
         messages.success(self.request,'post created successfully')
         return super().form_valid(form)
 
+class AddCategoryView(CreateView):
+    model = Category
+    template_name = 'add_category.html'
+    fields = '__all__'
+    
+
 class UpdatePostView(UpdateView):
     model = Post
+    # form_class = EditForm
     template_name = 'update_post.html'
     fields = ['title','title_tag', 'body']
 
